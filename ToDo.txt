@@ -1,0 +1,9 @@
+Things to do:
+1. Expand map.
+2. Fix inventory resizing at different resolution.
+3. Add new items to game.
+4. Add new sprites for items.
+5. Randomize damage dealt by player and enemies.
+6. Fix respawning enemies when we change level.
+Thing we are working at:
+Inventory - PezeM
