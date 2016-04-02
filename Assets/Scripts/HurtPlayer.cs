@@ -3,8 +3,10 @@ using System.Collections;
 
 public class HurtPlayer : MonoBehaviour
 {
-    public int damageToGive;
     private int _currentDamage;
+	private int damageApplied; // the damage that will be applied after the operation that 
+	public int minDamage; // min damage(set from inspector)
+	public int maxDamage; // max damage(set from inspector)
 
     public GameObject damageNumber;
 
@@ -40,7 +42,8 @@ public class HurtPlayer : MonoBehaviour
         {
             if (ableToAttack == true) // if the slime is able to attack...
             {
-                _currentDamage = damageToGive - _thePlayerStats.currentDefence;
+				damageApplied = (int)Mathf.Floor(Random.Range(minDamage+1,maxDamage+2)); // generate a random number between the min and max and turn it into an int
+				_currentDamage = damageApplied - _thePlayerStats.currentDefence; //set the damage that will be applied
 
                 if (_currentDamage <= 0)
                 {
