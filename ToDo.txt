@@ -7,3 +7,4 @@ Things to do:
 6. Fix respawning enemies when we change level.
 Thing we are working at:
 Inventory - PezeM
+Randomizing enemy damage - Duuh
