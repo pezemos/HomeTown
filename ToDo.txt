@@ -4,7 +4,10 @@ Things to do:
 3. Add new items to game.
 4. Add new sprites for items.
 5. Fix respawning enemies when we change level.
+6. Fix swords positiong when moving down.
+7. Add player statistics.
+8. Add more monsters.
+9. Give a skill to monster - knockback.
 Thing we are working at:
 Inventory - PezeM
 Randomizing enemy damage - Duuh
-Randomize damage dealt by player - troy, finished
