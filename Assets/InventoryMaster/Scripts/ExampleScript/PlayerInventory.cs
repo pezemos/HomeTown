@@ -29,7 +29,6 @@ public class PlayerInventory : MonoBehaviour
     float maxDamage = 0;
     float maxArmor = 0;
 
-    public float currentHealth = 60;
     float currentMana = 100;
     float currentDamage = 0;
     float currentArmor = 0;
@@ -210,8 +209,8 @@ public class PlayerInventory : MonoBehaviour
         {
             if (item.itemAttributes[i].attributeName == "Health")
             {
-                if ((pS.currentHP + item.itemAttributes[i].attributeValue) > pS.HPLevels[pS.currentLevel])
-                    pS.currentHP = pS.HPLevels[pS.currentLevel];
+                if ((pS.currentHP + item.itemAttributes[i].attributeValue) > pS.maxHP)
+                    pS.currentHP = pS.maxHP;
                 else
                     pS.currentHP += item.itemAttributes[i].attributeValue;
             }
@@ -231,12 +230,17 @@ public class PlayerInventory : MonoBehaviour
             }
             if (item.itemAttributes[i].attributeName == "Damage")
             {
-                if ((pS.currentAttack + item.itemAttributes[i].attributeValue) > pS.attackLevels[pS.currentLevel])
-                    pS.currentAttack = pS.attackLevels[pS.currentLevel];
-                else
-                    pS.currentAttack += item.itemAttributes[i].attributeValue;
+                pS.currentAttack += item.itemAttributes[i].attributeValue;
+
+                //if ((pS.currentAttack + item.itemAttributes[i].attributeValue) > thePlayer.playerMaxAttack)
+                //    thePlayer.playerCurrentAttack = thePlayer.playerMaxDefence;
+                //else
+                //    thePlayer.playerCurrentAttack += item.itemAttributes[i].attributeValue;
             }
         }
+
+        pS.UpdateStats();
+
         //if (HPMANACanvas != null)
         //{
         //    UpdateManaBar();
@@ -249,14 +253,16 @@ public class PlayerInventory : MonoBehaviour
         for (int i = 0; i < item.itemAttributes.Count; i++)
         {
             if (item.itemAttributes[i].attributeName == "Health")
-                pS.HPLevels[pS.currentLevel] += item.itemAttributes[i].attributeValue;
+                pS.maxHP += item.itemAttributes[i].attributeValue;
             if (item.itemAttributes[i].attributeName == "Mana")
                 maxMana += item.itemAttributes[i].attributeValue;
             if (item.itemAttributes[i].attributeName == "Armor")
-                maxArmor += item.itemAttributes[i].attributeValue;
+                pS.currentDefence += item.itemAttributes[i].attributeValue;
             if (item.itemAttributes[i].attributeName == "Damage")
-                maxDamage += item.itemAttributes[i].attributeValue;
+                pS.currentAttack += item.itemAttributes[i].attributeValue;
         }
+
+        pS.UpdateStats();
         //if (HPMANACanvas != null)
         //{
         //    UpdateManaBar();
@@ -269,14 +275,16 @@ public class PlayerInventory : MonoBehaviour
         for (int i = 0; i < item.itemAttributes.Count; i++)
         {
             if (item.itemAttributes[i].attributeName == "Health")
-                maxHealth -= item.itemAttributes[i].attributeValue;
+                pS.maxHP -= item.itemAttributes[i].attributeValue;
             if (item.itemAttributes[i].attributeName == "Mana")
                 maxMana -= item.itemAttributes[i].attributeValue;
             if (item.itemAttributes[i].attributeName == "Armor")
-                maxArmor -= item.itemAttributes[i].attributeValue;
+                pS.currentDefence -= item.itemAttributes[i].attributeValue;
             if (item.itemAttributes[i].attributeName == "Damage")
-                maxDamage -= item.itemAttributes[i].attributeValue;
+                pS.currentAttack -= item.itemAttributes[i].attributeValue;
         }
+
+        pS.UpdateStats();
         //if (HPMANACanvas != null)
         //{
         //    UpdateManaBar();

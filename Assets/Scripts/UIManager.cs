@@ -6,18 +6,16 @@ public class UIManager : MonoBehaviour
 {
     public Slider healthBar;
     public Text HPText;
-    public PlayerHealthManager playerHealth;
 
     public Text levelText;
 
-    private PlayerStats _thePlayerStats;
+    public PlayerStats _thePlayerStats;
 
     private static bool _uiExists;
 
     // Use this for initialization
     void Start ()
     {
-        _thePlayerStats = GetComponent<PlayerStats>();
 
         // Checking if UI Exists
         if (!_uiExists)
@@ -35,11 +33,15 @@ public class UIManager : MonoBehaviour
 	void Update ()
 	{
         // Updating health bar
-	    healthBar.maxValue = playerHealth.playerMaxHealth;
-	    healthBar.value = playerHealth.playerCurrentHealth;
-	    HPText.text = "HP: " + playerHealth.playerCurrentHealth + "/" + playerHealth.playerMaxHealth;
+        //healthBar.maxValue = playerHealth.playerMaxHealth;
+        //healthBar.value = playerHealth.playerCurrentHealth;
+	    HPText.text = "HP: " + _thePlayerStats.currentHP + "/" + _thePlayerStats.HPLevels[_thePlayerStats.currentLevel];
+        healthBar.maxValue = _thePlayerStats.HPLevels[_thePlayerStats.currentLevel];
+	    healthBar.value = _thePlayerStats.currentHP;
+        //HPText.text = "HP: " + _thePlayerStats.currentHP + "/" + _thePlayerStats.HPLevels[_thePlayerStats.currentLevel];
+
 
         // Updating level bar
-	    levelText.text = "Level: " + _thePlayerStats.currentLevel;
+        levelText.text = "Level: " + _thePlayerStats.currentLevel;
 	}
 }

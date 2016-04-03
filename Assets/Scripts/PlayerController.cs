@@ -12,6 +12,9 @@ public class PlayerController : MonoBehaviour
     private Animator _animator;
     private Rigidbody2D _myRigidbody;
 
+    private PlayerStats playerStats;
+    public int goldToGive;
+
     private bool _playerMoving;
     public Vector2 lastMove;
 
@@ -27,6 +30,7 @@ public class PlayerController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        playerStats = FindObjectOfType<PlayerStats>();
         _animator = GetComponent<Animator>();
         _myRigidbody = GetComponent<Rigidbody2D>();
 
@@ -121,6 +125,7 @@ public class PlayerController : MonoBehaviour
         if (col.gameObject.name == "goldCoins(Clone)")
         {
             Destroy(col.gameObject);
+            playerStats.AddGold(goldToGive);
         }
     }
 }
