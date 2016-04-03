@@ -3,11 +3,10 @@ using System.Collections;
 
 public class PlayerHealthManager : MonoBehaviour
 {
-    public int playerMaxHealth;
-    public int playerCurrentHealth;
-
     private bool _flashActive;
-    public float flashLength;
+    [SerializeField]
+    private float flashLength;
+
     private float _flashCounter;
 
     private SpriteRenderer _playerSprite;
@@ -15,17 +14,11 @@ public class PlayerHealthManager : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-	    playerCurrentHealth = playerMaxHealth;
 	    _playerSprite = GetComponent<SpriteRenderer>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	    if (playerCurrentHealth <= 0)
-	    {
-	        gameObject.SetActive(false);
-	    }
-
         // Showing player damage
 	    if (_flashActive)
 	    {
@@ -54,23 +47,4 @@ public class PlayerHealthManager : MonoBehaviour
 	        _flashCounter -= Time.deltaTime;
 	    }
 	}
-
-    public void HurtPlayer(int damageToGive)
-    {
-        playerCurrentHealth -= damageToGive;
-
-        _flashActive = true;
-        _flashCounter = flashLength;
-
-    }
-
-    public void SetMaxHealth()
-    {
-        playerCurrentHealth = playerMaxHealth;
-    }
-
-    public void HealPlayer(int amountToHeal)
-    {
-        playerCurrentHealth += amountToHeal;
-    }
 }

@@ -3,8 +3,10 @@ using System.Collections;
 
 public class HurtPlayer : MonoBehaviour
 {
-    public int damageToGive;
     private int _currentDamage;
+    private int damageApplied; // the damage that will be applied after the operation that 
+    public int minDamage; // min damage(set from inspector)
+    public int maxDamage; // max damage(set from inspector);
 
     public GameObject damageNumber;
 
@@ -13,6 +15,7 @@ public class HurtPlayer : MonoBehaviour
     private bool ableToAttack; // if the slime is able to attack
 
     private PlayerStats _thePlayerStats;
+
     void Start()
     {
         _thePlayerStats = FindObjectOfType<PlayerStats>();
@@ -29,7 +32,7 @@ public class HurtPlayer : MonoBehaviour
             {
                 ableToAttack = true; // slime is able to attack
                 attackCooldown = cooldown; // and the attackCooldown is set to the cooldown set in the inspector again
-                print(name + " is ready to attack!"); // just prints into the console to detect bugs
+                print(name + " is ready to attack!"); // just prints into the console to detect bugs 
             }
         }
     }
@@ -40,15 +43,18 @@ public class HurtPlayer : MonoBehaviour
         {
             if (ableToAttack == true) // if the slime is able to attack...
             {
-                _currentDamage = damageToGive - _thePlayerStats.currentDefence;
+                // generate a random number between the min and max and turn it into an int
+                damageApplied = (int)Mathf.Floor(Random.Range(minDamage, maxDamage + 1));
+                //set the damage that will be applied
+                _currentDamage = damageApplied - _thePlayerStats.currentDefence; 
 
                 if (_currentDamage <= 0)
                 {
                     _currentDamage = 1;
                 }
 
-                other.gameObject.GetComponent<PlayerHealthManager>().HurtPlayer(_currentDamage);
-                Debug.Log("Dame dealt " + _currentDamage + " from " + gameObject.name);
+                other.gameObject.GetComponent<PlayerStats>().HurtPlayer(_currentDamage);
+                Debug.Log("Damage dealt:  " + _currentDamage + " from " + gameObject.name);
 
                 var clone = (GameObject)Instantiate(damageNumber, other.transform.position, Quaternion.Euler(Vector3.zero));
                 clone.GetComponent<FloatingNumbers>().damageNumber = _currentDamage;

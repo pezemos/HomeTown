@@ -6,7 +6,7 @@ public class EnemyHealthManager : MonoBehaviour
     public int enemyMaxHealth;
     public int enemyCurrentHealth;
     public int experienceToGive;
-    public GameObject enemydrop;
+    public GameObject enemyDrop;
 
     private PlayerStats _thePlayerStats;
     private Vector3 enemyPosistion;
@@ -25,7 +25,7 @@ public class EnemyHealthManager : MonoBehaviour
         if (enemyCurrentHealth <= 0)
         {
             enemyPosistion = transform.position; //get position where the enemy died;
-            Instantiate(enemydrop, enemyPosistion, Quaternion.identity);
+            Instantiate(enemyDrop, enemyPosistion, Quaternion.identity);
             Destroy(gameObject);
             _thePlayerStats.AddExperience(experienceToGive);
         }
