@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class HurtEnemy : MonoBehaviour
@@ -10,6 +10,17 @@ public class HurtEnemy : MonoBehaviour
     public GameObject damageBurst;
     public Transform hitPoint;
     public GameObject damageNumber;
+
+	public int minRanDam  = -3;
+	public int maxRanDam = +3;
+	private int randomDamage;
+
+
+	public int critChance;
+	public int missChance;
+	public int critBonusDamage;
+
+	private int critmiss;
 
 
     private PlayerStats _thePlayerStats;
@@ -29,15 +40,37 @@ public class HurtEnemy : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy")
         {
-            _currentDamage = damageToGive + _thePlayerStats.currentAttack;
+			critmiss = Random.Range (1, 100);
+			randomDamage = Random.Range (minRanDam, maxRanDam);
 
-            other.gameObject.GetComponent<EnemyHealthManager>().HurtEnemy(_currentDamage);
-            Debug.Log("Zadane obrazenia " + _currentDamage + " do " + other.gameObject.name);
+			if (critmiss < missChance) {
+				//miss 
+				_currentDamage = 0;
+				Debug.Log ("Zadane obrazenia Missed!");
 
-            // Particle effect
-            Instantiate(damageBurst, hitPoint.position, hitPoint.rotation);
-            var clone = (GameObject)Instantiate(damageNumber, hitPoint.position, Quaternion.Euler(Vector3.zero));
-            clone.GetComponent<FloatingNumbers>().damageNumber = _currentDamage;
-        }
+			}
+			 else if (critmiss > critChance) {
+				//critical 
+				_currentDamage = (damageToGive + _thePlayerStats.currentAttack + randomDamage) + critBonusDamage;
+				other.gameObject.GetComponent<EnemyHealthManager> ().HurtEnemy (_currentDamage);
+				Debug.Log ("Zadane obrazenia Critical!" + _currentDamage + " do " + other.gameObject.name);
+
+			}
+			 else {
+				//normal attack
+				_currentDamage = (damageToGive + _thePlayerStats.currentAttack + randomDamage);
+				other.gameObject.GetComponent<EnemyHealthManager> ().HurtEnemy (_currentDamage);
+				Debug.Log ("Zadane obrazenia " + _currentDamage + " do " + other.gameObject.name);
+
+			}
+			// Particle effect
+
+			Instantiate (damageBurst, hitPoint.position, hitPoint.rotation);
+			var clone = (GameObject)Instantiate (damageNumber, hitPoint.position, Quaternion.Euler (Vector3.zero));
+			clone.GetComponent<FloatingNumbers> ().damageNumber = _currentDamage;
+			
+		}
+
+
     }
 }
