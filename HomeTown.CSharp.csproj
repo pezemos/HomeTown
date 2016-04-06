@@ -107,6 +107,12 @@
     <Compile Include="Assets\InventoryMaster\Scripts\Item\SplitItem.cs" />
     <Compile Include="Assets\InventoryMaster\Scripts\Tooltip\Tooltip.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
+    <Compile Include="Assets\Scripts\Character Classes\Attribute.cs" />
+    <Compile Include="Assets\Scripts\Character Classes\BaseCharacter.cs" />
+    <Compile Include="Assets\Scripts\Character Classes\BaseStats.cs" />
+    <Compile Include="Assets\Scripts\Character Classes\ModifiedStat.cs" />
+    <Compile Include="Assets\Scripts\Character Classes\Skill.cs" />
+    <Compile Include="Assets\Scripts\Character Classes\Vital.cs" />
     <Compile Include="Assets\Scripts\DestroyOverTime.cs" />
     <Compile Include="Assets\Scripts\EnemyHealthManager.cs" />
     <Compile Include="Assets\Scripts\FloatingNumbers.cs" />

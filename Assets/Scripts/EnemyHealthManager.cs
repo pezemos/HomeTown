@@ -6,6 +6,8 @@ public class EnemyHealthManager : MonoBehaviour
     public int enemyMaxHealth;
     public int enemyCurrentHealth;
     public int experienceToGive;
+    public int goldToGive;
+
     public GameObject enemyDrop;
 
     private PlayerStats _thePlayerStats;
