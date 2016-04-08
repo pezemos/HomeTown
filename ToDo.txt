@@ -10,4 +10,3 @@ Things to do:
 9. Give a skill to monster - knockback.
 Thing we are working at:
 Inventory - PezeM
-Randomizing enemy damage - Duuh
